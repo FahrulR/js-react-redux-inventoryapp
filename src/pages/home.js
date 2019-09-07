@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Route } from 'react-router-dom'
-import { Navbar, Nav, Button, Image } from 'react-bootstrap'
+import { Navbar, Nav, Button, Image, Container, Spinner } from 'react-bootstrap'
 import Sidebar from 'react-sidebar'
 
 import Inventory from '../the-inventory-vector-logo.svg'
@@ -42,7 +42,7 @@ class home extends React.Component {
 
   render () {
     console.log(this.props)
-    return (
+    return ( 
       <div>
         <Sidebar
           sidebar={<SideBarUser

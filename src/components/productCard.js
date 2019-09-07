@@ -30,9 +30,10 @@ class ProductCard extends Component {
       return <Redirect to={`/products/${this.state.productid}`}/>
     const {description} = this.state
     return (
-      <Card className='card shadow-lg'
+      <Card style={{cursor:'pointer' }} className='card shadow-lg'
         onClick={() => this.redirectToDetails()}
         >
+          <Card.Img variant="top" style={{width:"100%"}} src={this.state.image} className="book-image"/>
         <Card.Body>
           <Card.Title>{this.state.name}</Card.Title>
           <Card.Text>

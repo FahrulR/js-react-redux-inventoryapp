@@ -139,7 +139,7 @@ class detailProducts extends Component {
           <div className='container-fluid'>
             <div className='row'>
               <div className='col-md-12 p-0'>
-                <div className='bg-header' style={{ backgroundImage: `url('http://www.impresserp.com/wp-content/uploads/2017/02/Inventory-background.png` }}>
+                <div className='bg-header' style={{ backgroundImage: `url('http://www.impresserp.com/wp-content/uploads/2017/02/Inventory-background.png`, width: "100%", height: "auto" }}>
                   <div className='col-8 col-sm-6 p-3'>
                     <Link to="../../home" class='btn btn-warning' style={{position:'fixed'}}>
                       <FontAwesomeIcon icon={faArrowLeft} />
@@ -190,7 +190,7 @@ class detailProducts extends Component {
               <div class='row align-items-start' style={{ marginLeft: '20vh' }}>
                 <div class='row justify-content-start'>
                   <div class='col-6 col-md-4'>
-                    <div className='small' style={{ backgroundImage: `url('${productData.image}')`}}></div>
+                    <div className='small' style={{ backgroundImage: `url('${productData.image}')`, backgroundSize: "cover"}}></div>
                   </div>
                 </div>
                 <div class='row justify-content-end'>

@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{Fragment} from 'react'
 import {connect} from 'react-redux'
 import { Alert, Button, Spinner, Container } from 'react-bootstrap'
 
@@ -35,19 +35,19 @@ class ProductList extends React.Component{
   
  render(){
 
-    const {data} = this.state
     return(
         <div style={{padding:"3vw", textAlign:"left"}}>
           <div style={{display: 'flex', flexWrap:"wrap", flexDirection: 'row'}} className="justify-content-between">
             {
-               data !== null && data.productList ?
-               data.productList.isLoading ? 
-               <Container>
-                 <h4><Spinner animation="border"/>Loading</h4>
-               </Container>
-                :
-                data.productList.map((products, index) => {
-                  return( 
+                this.props.products.productList.length !== 0?
+                this.props.products.productList.map((products, index) => {
+                  
+                  return(  
+                    this.props.products.isLoading ? 
+                    <Container>
+                      <h4><Spinner animation="grow" variant="info"/></h4>
+                    </Container>
+                    :
                       <div style={{marginTop:"40px"}}>
                       <ProductCard  
                         onClick={() => this.getDetails(index)}
@@ -63,11 +63,21 @@ class ProductList extends React.Component{
                         </div>
                     )
                   })
-               
                 :
+                
                 <Alert variant=''></Alert>
             }
           </div>
+          <Fragment>
+            <Button className="btn btn-warning" 
+              disabled={Number(this.state.page) === 1}
+              onClick={()=>{this.page(-1)}}
+            >
+              {'<'}
+            </Button>
+            <Button variant="warning">{this.state.page}</Button>
+            <Button className="btn btn-warning" onClick={()=>{this.page(1)}}>{'>'}</Button>
+          </Fragment>
         </div>
     )
   }

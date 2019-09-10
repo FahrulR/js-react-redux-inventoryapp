@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import {connect} from 'react-redux'
+import Loader from '../components/Loader';
 import {deleteProduct, getProductById} from '../publics/actions/products'
 import {getProfile} from '../publics/actions/users'
 import store from '../publics/store'
@@ -9,8 +10,9 @@ import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 import {Alert, Modal, Button, Badge} from 'react-bootstrap'
 import ModalEditProduct from '../components/modalEditProduct'
 import {Link} from 'react-router-dom'
+import { confirmAlert } from 'react-confirm-alert'; // Import
+import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 
-const token = window.localStorage.getItem("token")
 
 class detailProducts extends Component {
   constructor(props){
@@ -25,12 +27,12 @@ class detailProducts extends Component {
       modalMessage:'',
       unsubscribe: store.subscribe(this.listener)
     }
-    // console.log('here list',this.state.productData.name)
+    console.log('here list',this.state.productData)
   }
 
   listener = () => {
     const current = store.getState().products.productsList.find ((products) => {
-      return products.productid === Number(this.props.productid)
+      return products.id === Number(this.props.productid)
     })
     console.log(current, this.state.productData)
     if(current !== this.state.productData){
@@ -38,13 +40,21 @@ class detailProducts extends Component {
     }
   }
 
-  getProductData = async () => {
-    await this.props.dispatch(getProductById(this.props.productid))
-    this.setState(
-      {productData: this.props.products.productsList.find((products) => {
-        return products.productid === Number(this.props.productid)
-      })},
-    )
+   getProductData = async () => {
+    this.props.dispatch(getProductById(this.props.productid))
+      .then(()=>{
+        const productData = this.props.products.productList.find((products)=>{return Number(products.id) === Number(this.props.productid)})
+        if(productData !== undefined){
+          this.setState({productData}
+          )
+        }else{
+          this.props.history.push('/')
+        }
+      })
+      .catch(err => {
+        console.error(err)
+        this.props.history.push('/')
+      })
   }
   
   addProductQuantity = e => {
@@ -91,7 +101,13 @@ class detailProducts extends Component {
   }
 
   handleDelete = (event) => {
-    this.props.dispatch(deleteProduct(this.state.productData.id))
+    confirmAlert({
+      title: 'Confirm to delete',
+      message: 'Are you sure you want to delete this?',
+      buttons: [
+        {
+          label: 'Yes',
+          onClick: () => this.props.dispatch(deleteProduct(this.state.productData.id))
       .then(() => {
         this.setState({
           showModal: true,
@@ -107,6 +123,13 @@ class detailProducts extends Component {
           modalMessage: this.props.products.errMessage
         })
       })
+        },
+        {
+          label: 'No',
+          onClick: () => this.props.history.push(`/products/`+this.state.productData.id)
+        }
+      ]
+    });
   }
 
 
@@ -123,9 +146,7 @@ class detailProducts extends Component {
     if(productData === undefined){
       console.log(this.state)
       return (
-        <div className="container">
-          <h2>Loading ....</h2>
-        </div>
+        <Loader style={{marginTop: "100px"}}/>
       )
     } else if (productData === null){
       console.log(this.state)
@@ -141,7 +162,7 @@ class detailProducts extends Component {
               <div className='col-md-12 p-0'>
                 <div className='bg-header' style={{ backgroundImage: `url('http://www.impresserp.com/wp-content/uploads/2017/02/Inventory-background.png`, width: "100%", height: "auto" }}>
                   <div className='col-8 col-sm-6 p-3'>
-                    <Link to="../../home" class='btn btn-warning' style={{position:'fixed'}}>
+                    <Link to="../../home" className='btn btn-warning' style={{position:'fixed'}}>
                       <FontAwesomeIcon icon={faArrowLeft} />
                     </Link>
                   </div>
@@ -172,13 +193,13 @@ class detailProducts extends Component {
                       <h2>{productData.name}</h2>
                     </font>
                   </div>
-                  <div class='p-0 mb-3 bd-highlight'>
-                    {/* <font>  
+                  {/* <div class='p-0 mb-3 bd-highlight'>
+                    <font>  
                       <h3>
-                        <b>{stringDateReleased}</b>
+                        <b>{productData.date_added}</b>
                       </h3>
-                    </font> */}
-                  </div>
+                    </font>
+                  </div> */}
                   <div class='p-0 bd-highlight'>Description: {productData.description}</div>
                   <div class='p-0 bd-highlight'>Category: {productData.category}</div>
                   <div class='p-0 bd-highlight'>Stocks: {productData.quantity}</div> 
@@ -190,7 +211,7 @@ class detailProducts extends Component {
               <div class='row align-items-start' style={{ marginLeft: '20vh' }}>
                 <div class='row justify-content-start'>
                   <div class='col-6 col-md-4'>
-                    <div className='small' style={{ backgroundImage: `url('${productData.image}')`, backgroundSize: "cover"}}></div>
+                    <div className='small' style={{ backgroundImage: `url('${productData.image}'), url('http://modulos.ai/wp-content/themes/cannyon_/media/_frontend/img/grid-no-image.png')`, backgroundSize: "contain", backgroundRepeat: "no-repeat"}}></div>
                   </div>
                 </div>
                 <div class='row justify-content-end'>

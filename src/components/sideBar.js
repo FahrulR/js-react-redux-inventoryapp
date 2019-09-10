@@ -4,6 +4,7 @@ import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {getProfile} from '../publics/actions/users'
 import ModalAddProduct from './modalAddProduct'
+import ModalAddCategory from './modalAddCategory'
 
 class sideBar extends Component {
   constructor(props){
@@ -44,6 +45,7 @@ class sideBar extends Component {
                   this.state.level === "regular" ? 
                   <Row className="justify-content-md-left">
                     <ModalAddProduct history={this.state.history}/>
+                    <ModalAddCategory history={this.state.history}/>
                   </Row>
                   :''
               }

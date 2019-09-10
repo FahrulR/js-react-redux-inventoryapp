@@ -3,7 +3,7 @@ import React, {Fragment} from 'react'
 import {connect} from 'react-redux'
 
 import {Modal, Row, Col, Form, Button} from 'react-bootstrap'
-import {getProductById} from '../publics/actions/products'
+// import {getProductById} from '../publics/actions/products'
 import {editProduct} from '../publics/actions/products'
 import {getCategory} from '../publics/actions/category'
 
@@ -61,19 +61,10 @@ class FormEditProduct extends React.Component{
         })
     }
 
-    getProductData = async () => {
-        await this.props.dispatch(getProductById(this.props.productid))
-        this.setState(
-          {productData: this.props.products.productsList.find((products) => {
-            return products.productid === Number(this.props.productid)
-          })},
-        )
-      }
 
     componentDidMount = async () => {
         await this.props.dispatch(getCategory())
         this.setState ({categoryList: this.props.category.categoryList})
-        this.getProductData()
     }
 
     render(){
@@ -86,7 +77,7 @@ class FormEditProduct extends React.Component{
                     Name
                     </Form.Label>
                     <Col sm="10">
-                    <Form.Control value={this.state.formData.name} onChange={this.handleChange} type="text" name="name" />
+                    <Form.Control value={this.state.formData.name} onChange={this.handleChange} type="text" name="name" required />
                     </Col>
                 </Form.Group>
 
@@ -95,7 +86,7 @@ class FormEditProduct extends React.Component{
                     Description
                     </Form.Label>
                     <Col sm="10">
-                    <Form.Control value={this.state.formData.description} onChange={this.handleChange} type="text" name="description" />
+                    <Form.Control value={this.state.formData.description} onChange={this.handleChange} type="text" name="description" required/>
                     </Col>
                 </Form.Group>
 
@@ -104,7 +95,7 @@ class FormEditProduct extends React.Component{
                     Image URL
                     </Form.Label>
                     <Col sm="10">
-                    <Form.Control value={this.state.formData.image} onChange={this.handleChange} type="text" name="image"  />
+                    <Form.Control value={this.state.formData.image} onChange={this.handleChange} type="text" name="image"  required/>
                     </Col>
                 </Form.Group>
 
@@ -113,14 +104,14 @@ class FormEditProduct extends React.Component{
                     Stocks
                     </Form.Label>
                     <Col sm="10">
-                    <Form.Control value={this.state.formData.quantity} onChange={this.handleChange} name="quantity" type="number" min="0" />
+                    <Form.Control value={this.state.formData.quantity} onChange={this.handleChange} name="quantity" type="number" min="0" required/>
                     </Col>
                 </Form.Group>
 
                 <Form.Group as={Row} controlId="formPlaintextCategory">
                     <Form.Label column sm="2">Category</Form.Label>
                     <Col sm="10">
-                    <Form.Control onChange={this.handleChange} as="select" name="id_category">
+                    <Form.Control onChange={this.handleChange} as="select" name="id_category" required>
                     <option>--Select Category--</option>
                         {categoryList.length !== 0 ? categoryList.map((category) => {
                         const selected = this.state.id_category === category.id

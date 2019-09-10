@@ -4,8 +4,8 @@ import { Route } from 'react-router-dom'
 import { Navbar, Nav, Button, Image, Container, Spinner } from 'react-bootstrap'
 import Sidebar from 'react-sidebar'
 
+import CategoryList from '../components/categoryList'
 import Inventory from '../the-inventory-vector-logo.svg'
-import ProductList from '../components/productList'
 import DropDownCategory from '../components/dropDownCategory'
 import SideBarUser from '../components/sideBar'
 import { SearchProduct } from '../components/searchProducts'
@@ -13,10 +13,10 @@ import DropDownLimit from '../components/dropDownLimit'
 import DropDownSortBy from '../components/dropDownSort'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBars } from '@fortawesome/free-solid-svg-icons'
-import DetailProducts from './detailProducts'
 import { getProfile } from '../publics/actions/users'
+import { getCategory } from '../publics/actions/category'
 
-class home extends React.Component {
+class category extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -56,12 +56,12 @@ class home extends React.Component {
             <Button variant='light' onClick={() => this.onSetSidebarOpen(true)}>
               <FontAwesomeIcon icon={faBars} />
             </Button>
-            <DropDownCategory history={this.props.history}/>
-            <DropDownSortBy history={this.props.history}/>
+            {/* <DropDownCategory history={this.props.history}/> */}
+            {/* <DropDownSortBy history={this.props.history}/> */}
             {/* <DropDownLimit history={this.props.history}/> */}
-            &nbsp;
-            <SearchProduct history={this.props.history}/>
-           
+            {/* &nbsp; */}
+            {/* <SearchProduct history={this.props.history}/> */}
+           <h3>List of Category</h3>
           </Nav>
           <Navbar.Brand href="/">
           <Image src={Inventory} style={{width:'50px', height:'50px'}}/>
@@ -69,34 +69,17 @@ class home extends React.Component {
           </Navbar.Brand>
         </Navbar>
         <Route 
-          path="/home" 
+          path="/category" 
           exact={true}
           render={() => {
-            let params = new URLSearchParams(window.location.search)
             return(
               <div className="container md-5">
-                
-                <ProductList
-                  sortby={params.get("sortby")} 
-                  search={params.get("search")}
-                  limit={params.get("limit")}
-                  dataSource={`http://localhost:5000/products`} 
-                  key={window.location.href + this.state} />
+              <CategoryList history={this.props.history} key={window.location.href + this.state}/>
               </div>
             );
           }} 
         />
-         <Route
-              path={'/products/:id'}
-              exact={true}
-              component={(props) => {
-                return <DetailProducts 
-                {...props} productId={props.match.params.productid} 
-                productUrl={`products/${props.match.params.id}`}
-                productid = {props.match.params.id}
-                key={props.history.location}/>
-              }} 
-        />
+        
       </div>
     )
   }
@@ -108,4 +91,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps)(home)
+export default connect(mapStateToProps)(category)

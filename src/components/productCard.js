@@ -33,7 +33,7 @@ class ProductCard extends Component {
       <Card style={{cursor:'pointer' }} className='card shadow-lg'
         onClick={() => this.redirectToDetails()}
         >
-          <Card.Img variant="top" style={{width:"100%"}} src={this.state.image} className="book-image"/>
+          <Card.Img variant="top" style={{width:"100%"}} className="book-image" src={this.state.image} onError={(e)=>{e.target.onerror = null; e.target.src="http://modulos.ai/wp-content/themes/cannyon_/media/_frontend/img/grid-no-image.png"}}/>
         <Card.Body>
           <Card.Title>{this.state.name}</Card.Title>
           <Card.Text>

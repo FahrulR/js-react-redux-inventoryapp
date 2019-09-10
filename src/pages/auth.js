@@ -37,7 +37,7 @@ class auth extends Component {
             render={() => {
               return (
                   <div>
-                    <FormRegister />
+                    <FormRegister history={this.props.history}/>
                   </div>
               )
             }}

@@ -5,6 +5,7 @@ import './App.css'
 
 import Auth from './pages/auth'
 import Home from './pages/home'
+import Category from './pages/category'
 import DetailProducts from './pages/detailProducts'
 
 const App = () => {
@@ -20,10 +21,17 @@ const App = () => {
                   : <Redirect to='./login' />
               }}
             />
+            
             <Route
               path={'/home'}
               render={(props) => {
                 return <Home {...props}/>
+              }}
+            />
+             <Route
+              path={'/category'}
+              render={(props) => {
+                return <Category {...props}/>
               }}
             />
             <Route

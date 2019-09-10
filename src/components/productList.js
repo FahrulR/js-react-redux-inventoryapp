@@ -2,13 +2,13 @@ import React,{Fragment} from 'react'
 import {connect} from 'react-redux'
 import { Alert, Button, Spinner, Container } from 'react-bootstrap'
 
+import Loader from '../components/Loader';
 import ProductCard from './productCard'
 import {getProducts} from '../publics/actions/products'
 
 class ProductList extends React.Component{
   constructor(props){
     super(props)
-
 
     this.state = {
       dataSource: props.dataSource || "http://localhost:5000/products",
@@ -22,7 +22,7 @@ class ProductList extends React.Component{
   }
 
   page = (page) => {
-    this.getDataProducts(Number(this.state.page) + page)
+    this.getDataProducts(this.state.page + page)
   }
 
   getDataProducts = async (page) => {
@@ -36,6 +36,9 @@ class ProductList extends React.Component{
  render(){
 
     return(
+        this.props.products.isLoading ?
+        <Loader style={{marginTop: "100px"}}/>
+        :
         <div style={{padding:"3vw", textAlign:"left"}}>
           <div style={{display: 'flex', flexWrap:"wrap", flexDirection: 'row'}} className="justify-content-between">
             {
@@ -43,12 +46,8 @@ class ProductList extends React.Component{
                 this.props.products.productList.map((products, index) => {
                   
                   return(  
-                    this.props.products.isLoading ? 
-                    <Container>
-                      <h4><Spinner animation="grow" variant="info"/></h4>
-                    </Container>
-                    :
-                      <div style={{marginTop:"40px"}}>
+                    
+                      <div style={{marginTop:"50px"}}>
                       <ProductCard  
                         onClick={() => this.getDetails(index)}
                         productid={products.id}
@@ -68,7 +67,6 @@ class ProductList extends React.Component{
                 <Alert variant=''></Alert>
             }
           </div>
-          <Fragment>
             <Button className="btn btn-warning" 
               disabled={Number(this.state.page) === 1}
               onClick={()=>{this.page(-1)}}
@@ -76,8 +74,8 @@ class ProductList extends React.Component{
               {'<'}
             </Button>
             <Button variant="warning">{this.state.page}</Button>
-            <Button className="btn btn-warning" onClick={()=>{this.page(1)}}>{'>'}</Button>
-          </Fragment>
+            <Button className="btn btn-warning" onClick={()=>{this.page(1)}} disabled={Number(this.state.page) === undefined}>{'>'}</Button>
+         
         </div>
     )
   }

@@ -33,6 +33,17 @@ export const deleteCategory = (categoryid) => {
     }
 }
 
+export const getCategoryById = (categoryid) => {
+    return {
+        type: 'GET_CATEGORY_BY_ID',
+        payload: Axios.get(`http://localhost:5000/category/${categoryid}`,{
+            headers:{
+                Authorization: window.localStorage.getItem("token")
+            }
+        })
+    }
+}
+
 export const editCategory = (categoryid, data) => {
     return {
         type: 'EDIT_CATEGORY',

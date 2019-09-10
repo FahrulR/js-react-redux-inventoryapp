@@ -7,7 +7,7 @@ const initState = {
     isFulfilled: false
 }
 
-const product = (state = initState, action) => {
+const products = (state = initState, action) => {
     switch(action.type){
         case 'GET_PRODUCTS_PENDING':
             return{
@@ -124,4 +124,4 @@ const product = (state = initState, action) => {
     }
 }
 
-export default product
+export default products

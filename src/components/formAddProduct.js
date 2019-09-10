@@ -71,7 +71,7 @@ class FormAddProduct extends React.Component{
                     Name
                 </Form.Label>
                 <Col sm="10">
-                <Form.Control onChange={this.handleChange} type="text" name="name" placeholder="Name..." />
+                <Form.Control onChange={this.handleChange} type="text" name="name" placeholder="Name..." required/>
                 </Col>
             </Form.Group>
 
@@ -80,7 +80,7 @@ class FormAddProduct extends React.Component{
                     Description
                 </Form.Label>
                 <Col sm="10">
-                <Form.Control onChange={this.handleChange} type="text" name="description" placeholder="Description..." />
+                <Form.Control onChange={this.handleChange} type="text" name="description" placeholder="Description..." required/>
                 </Col>
             </Form.Group>
 
@@ -89,7 +89,7 @@ class FormAddProduct extends React.Component{
                     Image URL
                 </Form.Label>
                 <Col sm="10">
-                <Form.Control onChange={this.handleChange} type="text" name="image" placeholder="Image URL..." />
+                <Form.Control onChange={this.handleChange} type="text" name="image" placeholder="Image URL..." required />
                 </Col>
             </Form.Group>
 
@@ -98,14 +98,14 @@ class FormAddProduct extends React.Component{
                     Stocks
                 </Form.Label>
                 <Col sm="10">
-                <Form.Control onChange={this.handleChange} name="quantity" type="number" min="0" />
+                <Form.Control onChange={this.handleChange} name="quantity" type="number" min="0" required/>
                 </Col>
             </Form.Group>
 
             <Form.Group as={Row} controlId="formPlaintextCategory">
                 <Form.Label column sm="2">Category</Form.Label>
                 <Col sm="10">
-                <Form.Control onChange={this.handleChange} as="select" name="id_category">
+                <Form.Control onChange={this.handleChange} as="select" name="id_category" required>
                     <option>--Select Category--</option>
                     {categoryList.length !== 0 ? categoryList.map((category) => {
                     return <option value={category.id} key={category.id}> {category.name} </option>

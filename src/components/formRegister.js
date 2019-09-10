@@ -26,8 +26,9 @@ class formRegister extends Component {
         username: '',
         fullname: '',
         email: '',
-        password: ''
-      }
+        password: ''  
+      },
+      history: props.history
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -35,6 +36,8 @@ class formRegister extends Component {
 
   handleClose = () => {
     this.setState({showModal: false})
+    if (this.state.redirectOnCloseModal)
+    this.props.history.push('/')
   }
 
   handleChange = (event) => {
@@ -47,6 +50,7 @@ class formRegister extends Component {
       formData: newFormData
     },()=>{console.log(this.state.formData)})
   }
+  
 
   handleSubmit = (event) => {
     event.preventDefault()
@@ -55,9 +59,9 @@ class formRegister extends Component {
         this.setState({
           showModal: true,
           modalTitle:"Success Register",
-          modalMessage: res.action.payload.data.message
+          modalMessage: res.action.payload.data.message,
+          redirectOnCloseModal: true
         })
-        return <Redirect to="/login"/>
       })
       .catch(()=>{
         this.setState({
@@ -66,6 +70,7 @@ class formRegister extends Component {
           modalMessage: this.props.users.errMessage
         })
       })
+      
   }
 
   render () {

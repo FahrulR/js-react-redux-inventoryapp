@@ -4,8 +4,8 @@ import {connect} from 'react-redux'
 
 import {Modal, Row, Col, Form, Button} from 'react-bootstrap'
 // import {getProductById} from '../publics/actions/products'
-import {editProduct} from '../publics/actions/products'
-import {getCategory} from '../publics/actions/category'
+import {editProduct} from '../../publics/actions/products'
+import {getCategory} from '../../publics/actions/category'
 
 class FormEditProduct extends React.Component{
     constructor(props){
@@ -52,13 +52,14 @@ class FormEditProduct extends React.Component{
     handleSubmit = async (event) => {
         event.preventDefault();
         await this.props.dispatch(editProduct(this.state.productid,this.state.formData))
-        
+        .then(res => {
         this.setState({
             showModal:true,
             modalTitle:"Success",
             modalMessage:"Success edit product",
             redirectOnCloseModal: true
         })
+    })
     }
 
 

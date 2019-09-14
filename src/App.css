@@ -95,9 +95,8 @@
 }
 
 .small{
-  margin-top: -100px;
   border-radius:10px;
-  box-shadow: 10px 10px 16px -7px rgba(0,0,0,0.54);
+  box-shadow: rgba(0,0,0,0.0);
   margin-bottom:40px;
   width: 400px;
   height: 400px;

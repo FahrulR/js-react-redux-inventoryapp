@@ -1,6 +1,6 @@
 import React, {Fragment} from 'react'
 import {Modal, Button} from 'react-bootstrap'
-import FormAddCategory from './formAddCategory'
+import FormAddCategory from '../Form/FormAddCategory'
 
 class ModalAddCategory extends React.Component{
   constructor(props){

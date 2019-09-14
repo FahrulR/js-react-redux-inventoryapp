@@ -4,7 +4,7 @@ import {connect} from 'react-redux'
 
 import {Modal, Row, Col, Form, Button} from 'react-bootstrap'
 // import {getCategoryById} from '../publics/actions/category'
-import {editCategory} from '../publics/actions/category'
+import {editCategory} from '../../publics/actions/category'
 
 class FormEditCategory extends React.Component{
     constructor(props){

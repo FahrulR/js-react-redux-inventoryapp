@@ -3,7 +3,7 @@ import { Link2, Redirect } from 'react-router-dom'
 import {connect} from 'react-redux'
 
 import { Form, Modal } from 'react-bootstrap'
-import {login} from '../publics/actions/users'
+import {login} from '../../publics/actions/users'
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';

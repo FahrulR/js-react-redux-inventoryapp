@@ -2,8 +2,8 @@ import React,{Fragment} from 'react'
 import {connect} from 'react-redux'
 import { Alert, Button, Spinner, Container } from 'react-bootstrap'
 
-import Loader from '../components/Loader';
-import ProductCard from './productCard'
+import Loader from './Loader';
+import ProductCard from './ProductCard'
 import {getProducts} from '../publics/actions/products'
 
 class ProductList extends React.Component{
@@ -47,7 +47,7 @@ class ProductList extends React.Component{
                   
                   return(  
                     
-                      <div style={{marginTop:"50px"}}>
+                      <div style={{marginTop:"60px"}}>
                       <ProductCard  
                         onClick={() => this.getDetails(index)}
                         productid={products.id}
@@ -67,6 +67,7 @@ class ProductList extends React.Component{
                 <Alert variant=''></Alert>
             }
           </div>
+
             <Button className="btn btn-warning" 
               disabled={Number(this.state.page) === 1}
               onClick={()=>{this.page(-1)}}
@@ -74,7 +75,7 @@ class ProductList extends React.Component{
               {'<'}
             </Button>
             <Button variant="warning">{this.state.page}</Button>
-            <Button className="btn btn-warning" onClick={()=>{this.page(1)}} disabled={Number(this.state.page) === undefined}>{'>'}</Button>
+            <Button className="btn btn-warning" onClick={()=>{this.page(1)}} disabled={Number(this.state.page) === 2}>{'>'}</Button>
          
         </div>
     )

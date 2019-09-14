@@ -12,7 +12,7 @@ import {deleteCategory} from '../publics/actions/category'
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import IconButton from '@material-ui/core/IconButton';
-import ModalEditCategory from '../components/modalEditCategory'
+import ModalEditCategory from '../components/Modal/ModalEditCategory'
 import { confirmAlert } from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 

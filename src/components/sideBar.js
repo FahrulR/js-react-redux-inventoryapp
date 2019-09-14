@@ -3,8 +3,8 @@ import {Container, Row, Button, Image} from 'react-bootstrap'
 import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {getProfile} from '../publics/actions/users'
-import ModalAddProduct from './modalAddProduct'
-import ModalAddCategory from './modalAddCategory'
+import ModalAddProduct from './Modal/ModalAddProduct'
+import ModalAddCategory from './Modal/ModalAddCategory'
 
 class sideBar extends Component {
   constructor(props){

@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 
 import { Form, Modal } from 'react-bootstrap'
 
-import {register} from '../publics/actions/users'
+import {register} from '../../publics/actions/users'
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';

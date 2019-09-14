@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {Dropdown} from 'react-bootstrap'
-import {getCategory} from '../publics/actions/category'
+import {getCategory} from '../../publics/actions/category'
 
 class DropDownCategory extends React.Component{
   constructor(props){

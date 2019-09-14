@@ -34,10 +34,21 @@ export const getProductById = (productid) => {
 }
 
 
-export const AddProductQTY = (productid) => {
+export const addProductQTY = (productid) => {
     return {
         type: 'ADD_PRODUCT_QTY',
         payload: Axios.patch(`http://localhost:5000/products/${productid}/add=1`,{
+            headers:{
+                Authorization: token
+            }
+        })
+    }
+}
+
+export const reduceProductQTY = (productid) => {
+    return {
+        type: 'REDUCE_PRODUCT_QTY',
+        payload: Axios.patch(`http://localhost:5000/products/${productid}/reduce=1`,{
             headers:{
                 Authorization: token
             }

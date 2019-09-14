@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import { Route } from 'react-router-dom'
 
-import FormLogin from '../components/formLogin'
-import FormRegister from '../components/formRegister'
+import FormLogin from '../components/Form/FormLogin'
+import FormRegister from '../components/Form/FormRegister'
 
-class auth extends Component {
+class Auth extends Component {
   constructor(props){
     super(props)
     this.state = {
@@ -48,4 +48,4 @@ class auth extends Component {
   }
 }
 
-export default auth
+export default Auth

@@ -4,19 +4,19 @@ import { Route } from 'react-router-dom'
 import { Navbar, Nav, Button, Image, Container, Spinner } from 'react-bootstrap'
 import Sidebar from 'react-sidebar'
 
-import Inventory from '../the-inventory-vector-logo.svg'
-import ProductList from '../components/productList'
-import DropDownCategory from '../components/dropDownCategory'
-import SideBarUser from '../components/sideBar'
-import { SearchProduct } from '../components/searchProducts'
-import DropDownLimit from '../components/dropDownLimit'
-import DropDownSortBy from '../components/dropDownSort'
+import Inventory from '../V-Inventory-Logo-negative.png'
+import ProductList from '../components/ProductList'
+import DropDownCategory from '../components/Dropdown/DropDownCategory'
+import SideBarUser from '../components/SideBar'
+import { SearchProduct } from '../components/SearchProducts'
+import DropDownLimit from '../components/Dropdown/DropDownLimit'
+import DropDownSortBy from '../components/Dropdown/DropDownSort'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBars } from '@fortawesome/free-solid-svg-icons'
-import DetailProducts from './detailProducts'
+import DetailProducts from './DetailProducts'
 import { getProfile } from '../publics/actions/users'
 
-class home extends React.Component {
+class Home extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -63,11 +63,11 @@ class home extends React.Component {
             <SearchProduct history={this.props.history}/>
            
           </Nav>
-          <Navbar.Brand href="/">
-          <Image src={Inventory} style={{width:'50px', height:'50px'}}/>
-            <b>Inventory</b>
+                    <Navbar.Brand href="/">
+          <Image src={Inventory} style={{width:'200px', height:'50px'}}/>
           </Navbar.Brand>
         </Navbar>
+
         <Route 
           path="/home" 
           exact={true}
@@ -108,4 +108,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps)(home)
+export default connect(mapStateToProps)(Home)

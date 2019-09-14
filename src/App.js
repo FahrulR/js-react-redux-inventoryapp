@@ -3,10 +3,10 @@ import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom'
 
 import './App.css'
 
-import Auth from './pages/auth'
-import Home from './pages/home'
-import Category from './pages/category'
-import DetailProducts from './pages/detailProducts'
+import Auth from './pages/Auth'
+import Home from './pages/Home'
+import Category from './pages/Category'
+import DetailProducts from './pages/DetailProducts'
 
 const App = () => {
     return (
@@ -39,7 +39,7 @@ const App = () => {
               component={(props) => {
                 return <DetailProducts 
                 {...props} productId={props.match.params.productid} 
-                productUrl={`http://localhost:5000/products/${props.match.params.id}`}
+                productUrl={`192.168.1.18:5000/products/${props.match.params.id}`}
                 productid = {props.match.params.id}
                 key={props.history.location}/>
               }} 

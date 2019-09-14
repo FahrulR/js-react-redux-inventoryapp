@@ -1,6 +1,6 @@
 import React, {Fragment} from 'react'
 import {Modal, Button} from 'react-bootstrap'
-import FormEditProduct from './formEditProduct';
+import FormEditProduct from '../Form/FormEditProduct';
 
 class ModalEditProduct extends React.Component{
   constructor(props){

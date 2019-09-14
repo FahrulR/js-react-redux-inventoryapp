@@ -2,7 +2,7 @@ import React,{Fragment} from 'react'
 import {Row, Col, Form, Button, Modal} from 'react-bootstrap'
 import {connect} from 'react-redux'
 
-import {addCategory} from '../publics/actions/category'
+import {addCategory} from '../../publics/actions/category'
 
 class FormAddCategory extends React.Component{
     constructor(props){

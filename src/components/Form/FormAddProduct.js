@@ -2,8 +2,8 @@ import React,{Fragment} from 'react'
 import {Row, Col, Form, Button, Modal} from 'react-bootstrap'
 import {connect} from 'react-redux'
 
-import {addProduct} from '../publics/actions/products'
-import {getCategory} from '../publics/actions/category'
+import {addProduct} from '../../publics/actions/products'
+import {getCategory} from '../../publics/actions/category'
 
 class FormAddProduct extends React.Component{
     constructor(props){
@@ -48,12 +48,20 @@ class FormAddProduct extends React.Component{
     handleSubmit = async (event) => {
         event.preventDefault();
         await this.props.dispatch(addProduct(this.state.formData))
+         .then(res => {
         this.setState({
             showModal: true,
             modalTitle:"Success",
             modalMessage:"Product successfully added!",
             redirectOnCloseModal: true
         })
+    }).catch(()=>{
+        this.setState({
+          showModal:true,
+          modalTitle:"Failed",
+          modalMessage: "Please Select Category"
+        })
+      })
     }
 
     componentDidMount = async () => {

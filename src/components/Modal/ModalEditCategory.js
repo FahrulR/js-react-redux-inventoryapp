@@ -1,6 +1,6 @@
 import React, {Fragment} from 'react'
 import {Modal, Button} from 'react-bootstrap'
-import FormEditCategory from './formEditCategory';
+import FormEditCategory from '../Form/FormEditCategory';
 import EditIcon from '@material-ui/icons/Edit';
 import IconButton from '@material-ui/core/IconButton';
 

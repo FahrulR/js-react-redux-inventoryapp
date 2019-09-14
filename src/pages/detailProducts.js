@@ -2,19 +2,19 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import {connect} from 'react-redux'
 import Loader from '../components/Loader';
-import {deleteProduct, getProductById} from '../publics/actions/products'
+import {deleteProduct, getProductById, addProductQTY, reduceProductQTY} from '../publics/actions/products'
 import {getProfile} from '../publics/actions/users'
 import store from '../publics/store'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 import {Alert, Modal, Button, Badge} from 'react-bootstrap'
-import ModalEditProduct from '../components/modalEditProduct'
+import ModalEditProduct from '../components/Modal/ModalEditProduct'
 import {Link} from 'react-router-dom'
 import { confirmAlert } from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 
 
-class detailProducts extends Component {
+class DetailProducts extends Component {
   constructor(props){
     super(props)
     console.log(props)
@@ -61,12 +61,21 @@ class detailProducts extends Component {
     const token = window.localStorage.getItem("token")
     const {id} = this.props.match.params
     e.preventDefault()
-    axios.patch(`http://localhost:5000/products/${id}/add=1`, {
-      headers: {Authorization: token}
-    }).then(res =>{
-    alert('Success added')
-    this.props.history.push('/')
-    }).catch(err => console.log(err))
+    this.props.dispatch(addProductQTY(id))
+        .then(res => {
+        this.setState({
+            showModal: true,
+            modalTitle:"Success",
+            modalMessage:"Quantity successfully added!",
+            redirectOnCloseModal: true
+        })
+    }).catch(()=>{
+        this.setState({
+          showModal:true,
+          modalTitle:"Failed",
+          modalMessage: "Something Wrong"
+        })
+      })
     
   }
 
@@ -74,12 +83,21 @@ class detailProducts extends Component {
     const token = window.localStorage.getItem("token")
     const {id} = this.props.match.params
     e.preventDefault()
-    axios.patch(`http://localhost:5000/products/${id}/reduce=1`, {
-      headers: {Authorization: token}
-    }).then(res =>{
-    alert('Success reduced')
-    this.props.history.push('/')
-    }).catch(err => console.log(err))
+     this.props.dispatch(reduceProductQTY(id))
+        .then(res => {
+        this.setState({
+            showModal: true,
+            modalTitle:"Success",
+            modalMessage:"Quantity successfully reduced!",
+            redirectOnCloseModal: true
+        })
+    }).catch(()=>{
+        this.setState({
+          showModal:true,
+          modalTitle:"Failed",
+          modalMessage: "Something Wrong"
+        })
+      })
   }
 
 
@@ -247,4 +265,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps)(detailProducts)
+export default connect(mapStateToProps)(DetailProducts)
